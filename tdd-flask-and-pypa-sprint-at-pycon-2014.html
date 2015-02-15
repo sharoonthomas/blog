@@ -7,14 +7,21 @@
 
         <link rel="alternate"  href="/feeds/all.atom.xml" type="application/atom+xml" title="Outbox Full Atom Feed"/>
 
-        <title>all posts // Outbox // I would love to change the world, but they won’t give me the source code</title>
+        <title>TDD, flask and the pypa sprint at pycon 2014 // Outbox // I would love to change the world, but they won’t give me the source code</title>
 
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/theme/css/pure.css">
+    <link rel="stylesheet" href="/theme/css/pygments.css">
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".content").fitVids();
+        });
+    </script>
 </head>
 
 <body>
@@ -43,24 +50,45 @@
                 </div>
             </div>
         </div>
-    <div class="pure-u-1">
+    <div class="pure-u">
         <div class="content">
-            <h1 class="content-subhead">All posts</h1>
-                <div class="archive-item">
-                    <h5 class="archive-date">2014</h5>
-                    <h4 class="archive-date">09 May</h4>
-                    <div class="archive-post"><a href="tdd-flask-and-pypa-sprint-at-pycon-2014.html">TDD, flask and the pypa sprint at pycon 2014</a></div>
-                </div>
-                <div class="archive-item">
-                    <h5 class="archive-date">2012</h5>
-                    <h4 class="archive-date">12 March</h4>
-                    <div class="archive-post"><a href="tryton-web-client.html">The Tryton Web Client</a></div>
-                </div>
-                <div class="archive-item">
-                    <h5 class="archive-date">2009</h5>
-                    <h4 class="archive-date">14 January</h4>
-                    <div class="archive-post"><a href="i-created-this-blog-in-2006.html">I created this blog in 2006</a></div>
-                </div>
+            <section class="post">
+                <header class="post-header">
+                    <h1>TDD, flask and the pypa sprint at pycon 2014</h1>
+                        <p class="post-meta">
+                            // under                                 <a class="post-category" href="/tag/python.html">python</a>
+                                <a class="post-category" href="/tag/pycon.html">pycon</a>
+                        </p>
+                </header>
+            </section>
+            <p><em>Thanks to a controversial post by David Hansson declaring the death of test
+driven development, and the google hangout by David, Kent Beck and Martin
+Fowler that I finally have gathered the courage to write this post.</em></p>
+<p>I had the opportunity to sprint with the python packaging authority (pypa)
+team on warehouse, the next generation python package repository. I
+volunteered to refactor the codebase to use more of flask. What stumped me was
+the &quot;unit tests&quot; in the project.</p>
+<p>The package has 100% test coverage and the continuous integration system
+(read travis) ensures that any pull request which reduces that promptly fails.
+Sounds great isn't it ? But, soon came the issues and here are a few:</p>
+<p><strong>1. The false confidence of 100% coverage</strong></p>
+<p>As I moved the project from manually connected URL routes to using flask
+blueprints and the route decorator, I discovered two endpoints which were well
+tested but not connected to the URL Map because the contributor had forgotten
+to add them and the unit test only tested that given a stubbed request a
+stubbed response is returned.</p>
+<p><strong>2. The abuse of mocks and the resulting brittleness</strong></p>
+<img alt="Absure of mocks and the resulting brittleness" src="/images/content/technology/abuse-of-mocks.png" />
+<p>The above code tests the root view and from what I can count has 12 stubs. It
+felt wrong but I wasn't sure, but I was happy to see another developer at the
+sprint expressing his displeasure at the number of mocks he had to change to
+make a simple improvement in the code.</p>
+<p>During the <a class="reference external" href="https://plus.google.com/events/ci2g23mk0lh9too9bgbp3rbut0k">hangout</a>
+today, Kent beck highlighted such use of &quot;mocks returning mocks returning mocks&quot;
+as the primary reason why he thinks TDD becomes counterproductive.</p>
+<p>Comments on <a class="reference external" href="https://news.ycombinator.com/item?id=7721768">HN</a></p>
+
+            <a href="#" class="go-top">Go Top</a>
 <footer class="footer">
     <p>&copy; Sharoon Thomas &ndash;
         Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
